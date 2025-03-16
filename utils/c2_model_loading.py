@@ -1,3 +1,4 @@
+# Modified from https://github.com/joslefaure/HIT/hit/utils/c2_model_loading.py
 import logging
 import torch
 import pickle
