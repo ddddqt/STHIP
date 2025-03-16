@@ -176,13 +176,6 @@ class FastPath(nn.Module):
         self.Tconv3 = LateralBlock(conv_dims[2], alpha)
         self.Tconv4 = LateralBlock(conv_dims[3], alpha)
 
-    def _tconv_tam_conv37(self, conv_dims):
-        alpha = self.cfg.INPUT.ALPHA
-        self.Tconv1 = LateralBlock_TAM14(conv_dims[0], alpha)
-        self.Tconv2 = LateralBlock(conv_dims[1], alpha)
-        self.Tconv3 = LateralBlock(conv_dims[2], alpha)
-        self.Tconv4 = LateralBlock(conv_dims[3], alpha)
-
 
     def forward(self, x):
         out = self.conv1(x)
