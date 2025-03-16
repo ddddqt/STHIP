@@ -1,3 +1,4 @@
+# Modified from https://github.com/joslefaure/HIT/hit/utils/IA_helper.py
 import itertools
 
 def _block_set(ia_blocks):
