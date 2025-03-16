@@ -171,12 +171,6 @@ class FastPath(nn.Module):
         elif cfg.MODEL.BACKBONE.SLOWFAST.LATERAL == 'tconv-tam-conv37':
             self._tconv_tam_conv37(conv_dims)
 
-        self.bitm_use1 = cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK1
-        self.bitm_use2 = cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK2
-        self.bitm_use3 = cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK3
-        self.bitm_use4 = cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK4
-        self.bitm_long_use = cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LONG
-        self.bitm_short_use_numbers = cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LONG_NUM
 
 
     def _tconv(self, conv_dims):
@@ -202,23 +196,16 @@ class FastPath(nn.Module):
         tconv1 = self.Tconv1(out_maxpool)
 
         out = self.res_nl1(out_maxpool)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "FAST_USE_RES1_FC" or "FAST_USE_RES_FC" or "FASTSLOW_USE_RES_FC":
-            #     out = tim_space_use_4conv(out)
         tconv2 = self.Tconv2(out)
 
         out = self.res_nl2(out)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "FAST_USE_RES2_FC" or "FAST_USE_RES_FC" or "FASTSLOW_USE_RES_FC":
-            #     out = tim_space_use_4conv(out)
         tconv3 = self.Tconv3(out)
 
         out = self.res_nl3(out)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "FAST_USE_RES3_FC" or "FAST_USE_RES_FC" or "FASTSLOW_USE_RES_FC":
-            #     out = tim_space_use_4conv(out)
         tconv4 = self.Tconv4(out)
 
         out = self.res_nl4(out)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "FAST_SLOW_USE_FC" or "FAST_USE_FC":
-            #     out = tim_space_use_4conv(out)
+
         return out, [tconv1, tconv2, tconv3, tconv4]
 
 
@@ -289,27 +276,17 @@ class SlowPath(nn.Module):
         
         if lateral_connection:
             out = torch.cat([out, lateral_connection[0]], dim=1)
-            # print("lateral_connection_out1", out.shape)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "SLOW_USE_RES1_FC" or "SLOW_USE_RES_FC" or "FASTSLOW_USE_RES_FC":
-            #     out = tim_space_use_4conv(out)
-
         out = self.res_nl1(out)
         if lateral_connection:
             out = torch.cat([out, lateral_connection[1]], dim=1)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "SLOW_USE_RES2_FC" or "SLOW_USE_RES_FC" or "FASTSLOW_USE_RES_FC":
-            #     out = tim_space_use_4conv(out)
 
         out = self.res_nl2(out)
         if lateral_connection:
             out = torch.cat([out, lateral_connection[2]], dim=1)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "SLOW_USE_RES3_FC" or "SLOW_USE_RES_FC" or "FASTSLOW_USE_RES_FC":
-            #     out = tim_space_use_4conv(out)
 
         out = self.res_nl3(out)
         if lateral_connection:
             out = torch.cat([out, lateral_connection[3]], dim=1)
-            # if self.cfg.MODEL.BACKBONE.SLOWFAST.BITMBLOCK_LASTCONV == "SLOW_USE_RES4_FC" or "SLOW_USE_RES_FC" or "FASTSLOW_USE_RES_FC":
-            #     out = tim_space_use_4conv(out)
 
         out = self.res_nl4(out)
         return out
