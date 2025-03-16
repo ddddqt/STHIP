@@ -7,7 +7,6 @@ import torch.nn as nn
 from hit.modeling.common_blocks import ResNLBlock
 from hit.layers import FrozenBatchNorm3d
 from hit.modeling.backbone.sp_block import *
-from hit.modeling.roi_heads.unit_module.ativate_layer_2 import mapping_parsing
 
 
 def get_slow_model_cfg(cfg):
