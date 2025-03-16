@@ -1,3 +1,4 @@
+# Modified from https://github.com/joslefaure/HIT/hit/structures/memory_pool.py
 from collections import defaultdict
 
 class MemoryPool(object):
