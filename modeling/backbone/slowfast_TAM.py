@@ -13,8 +13,6 @@ from hit.modeling.roi_heads.unit_module.ativate_layer_2 import mapping_parsing
 
 def get_slow_model_cfg(cfg):
     backbone_strs = cfg.MODEL.BACKBONE.CONV_BODY.split('-')[1:]
-    #backbone_strs = backbone_strs[0]  # 获取第一个元素，即"Resnet50"
-    # print("backbone_strs[0]:",backbone_strs[0])
     error_msg = 'Model backbone {} is not supported.'.format(cfg.MODEL.BACKBONE.CONV_BODY)
 
     use_temp_convs_1 = [0]
