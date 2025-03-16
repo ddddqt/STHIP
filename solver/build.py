@@ -1,3 +1,4 @@
+# Modified from https://github.com/joslefaure/HIT/hit/solver/build.py
 import torch
 
 from .lr_scheduler import WarmupMultiStepLR, HalfPeriodCosStepLR
