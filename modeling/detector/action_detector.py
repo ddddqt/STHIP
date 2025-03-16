@@ -1,3 +1,4 @@
+# Modified from https://github.com/joslefaure/HIT/hit/modeling/detector/action_detector.py
 from torch import nn
 import torch
 import numpy as np
